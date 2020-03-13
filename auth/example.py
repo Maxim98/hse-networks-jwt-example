@@ -54,7 +54,7 @@ users.signup('zhoka@zhoka.xyz', '1234567')
 users.signup('lupa@lupa.xyz', 'gfhjkm')
 users.signup('pupa@pupa.xyz', 'nsytghjqltim123123')
 
-print('Users is storage:')
+print('Users in storage:')
 for user in users.user_by_id.values():
     print(user[cfg.FIELD_USER_ID], user[cfg.FIELD_EMAIL], user[cfg.FIELD_KEY])
 
