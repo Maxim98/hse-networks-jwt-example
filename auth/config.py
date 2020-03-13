@@ -1,0 +1,54 @@
+import os
+
+
+_MINUTE = 60
+_HOUR = 60 * _MINUTE
+_DAY = 24 * _HOUR
+
+
+PBKDF2_DIGEST_ALG = os.environ.get('PBKDF2_DIGEST_ALG', 'sha512')
+PBKDF2_KEY_LENGTH = int(os.environ.get('PBKDF2_KEY_LENGTH', 64))
+PBKDF2_ITERATIONS = int(os.environ.get('PBKDF2_ITERATIONS', 100000))
+PBKDF2_DELIMITER = os.environ.get('PBKDF2_DELIMITER', '::')
+
+
+# Generate a new keypair yourself:
+# openssl ecparam -genkey -name secp521r1 -noout -out ecdsa-p521-private.pem
+# openssl ec -in ecdsa-p521-private.pem -pubout -out ecdsa-p521-public.pem
+# cat ecdsa-p521-private.pem | base64
+# cat ecdsa-p521-public.pem | base64
+
+_EXAMPLE_PRIVATE_KEY = (
+    'LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1JSGJBZ0VCQkVIdExYQ3MyaDVBRkU3T'
+    'WNaN21Pb2l3OEFKUnhkNEhUaWF5UDQrOG9vRVFrVmZ0N2g3Y002c1oKTGFjOTdyQlQyNS81eF'
+    'IzMGpsVHZ5RkRsYUpHVGFseFVZYUFIQmdVcmdRUUFJNkdCaVFPQmhnQUVBVXlTblY0WQpLY3F'
+    'TUndxTThIYmpCQnZXRkIwWStiTTlMeWNWVEFsZnkwdWlSaElXMUNYdktLbzhLSi9vdUZQcVc2'
+    'aVcyRnlnCkorVkJTQnZybFNKcEoxV0NBYU0wYkpNMDFmK0xocUFXTmRuMDNML3M4aWZ2VUk3a'
+    'UtVZjVkaWlkd0c2WnNpT1YKckZkRmlSVzhJcklHdW96NGNCRms2TzR5SmZzb2ExTDNXd0RFNm'
+    'l4RwotLS0tLUVORCBFQyBQUklWQVRFIEtFWS0tLS0tCg=='
+)
+_EXAMPLE_PUBLIC_KEY = (
+    'LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlHYk1CQUdCeXFHU000OUFnRUdCU3VCQkFBa'
+    'kE0R0dBQVFCVEpLZFhoZ3B5cEpIQ296d2R1TUVHOVlVSFJqNQpzejB2SnhWTUNWL0xTNkpHRW'
+    'hiVUplOG9xandvbitpNFUrcGJxSmJZWEtBbjVVRklHK3VWSW1rblZZSUJvelJzCmt6VFYvNHV'
+    'Hb0JZMTJmVGN2K3p5Sis5UWp1SXBSL2wyS0ozQWJwbXlJNVdzVjBXSkZid2lzZ2E2alBod0VX'
+    'VG8KN2pJbCt5aHJVdmRiQU1UcUxFWT0KLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg=='
+)
+
+JWT_PRIVATE_KEY = os.environ.get('JWT_PRIVATE_KEY', _EXAMPLE_PRIVATE_KEY)
+JWT_PUBLIC_KEY = os.environ.get('JWT_PUBLIC_KEY', _EXAMPLE_PUBLIC_KEY)
+JWT_ALGORITHM = os.environ.get('JWT_ALGORITHM', 'ES512')
+JWT_ACCESS_EXPIRATION_SECONDS = int(
+    os.environ.get('JWT_ACCESS_EXPIRATION_SECONDS', 2 * _HOUR),
+)
+JWT_REFRESH_EXPIRATION_SECONDS = int(
+    os.environ.get('JWT_REFRESH_EXPIRATION_SECONDS', 2 * _DAY),
+)
+JWT_TOLERANCE_SECONDS = int(
+    os.environ.get('JWT_TOLERANCE_SECONDS', 5 * _MINUTE),
+)
+
+FIELD_USER_ID = 'userId'
+FIELD_EMAIL = 'email'
+FIELD_KEY = 'key'
+FIELD_ACCESS_TOKEN = 'accessToken'
